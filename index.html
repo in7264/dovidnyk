@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Телефонний довідник</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Телефонний довідник</h1>
+
+    <div class="tabs">
+        <button class="tablink active" onclick="openTab(event, 'addTab')">Додати абонента</button>
+        <button class="tablink" onclick="openTab(event, 'selectTab')">Вибрати абонента</button>
+        <button class="tablink" onclick="openTab(event, 'allContactsTab')">Всі абоненти</button>
+        <button class="tablink" onclick="openTab(event, 'callHistoryTab')">Історія дзвінків</button>
+    </div>
+
+    <div id="addTab" class="tabContent active">
+        <h2>Реєстрація нового абонента</h2>
+        <form id="addForm">
+            <label for="name">Ім'я абонента:</label>
+            <input type="text" id="name" required><br>
+            <label for="phoneNumber">Номер телефону:</label>
+            <input type="tel" id="phoneNumber" pattern="[0-9]{10}" required><br>
+            <button type="submit">Зберегти</button>
+        </form>
+    </div>
+
+    <div id="selectTab" class="tabContent">
+        <h2>Вибір абонента для додавання контактів</h2>
+        <label for="selectContact">Оберіть абонента:</label>
+        <select id="selectContact" onchange="loadContactDetails()"></select>
+        <h3 id="selectedContactName"></h3>
+        <div id="contactDetails"></div>
+    </div>
+
+    <div id="allContactsTab" class="tabContent">
+        <h2>Всі абоненти</h2>
+        <table id="allContactsTable">
+            <thead>
+                <tr>
+                    <th>Ім'я</th>
+                    <th>Номер телефону</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody id="allContactsList"></tbody>
+        </table>
+    </div>
+
+    <div id="callHistoryTab" class="tabContent">
+        <h2>Історія дзвінків абонентів</h2>
+        <label for="selectCallContact">Оберіть абонента:</label>
+        <select id="selectCallContact" onchange="loadCallHistory()"></select>
+        <h3 id="selectedCallContactName"></h3>
+        <div id="callHistoryDetails">
+            <h4>Додати новий запис про дзвінок:</h4>
+            <form id="addCallForm">
+                <label for="callTime">Час дзвінка:</label>
+                <input type="datetime-local" id="callTime" required><br>
+                <label for="otherNumber">Номер іншого абонента:</label>
+                <input type="tel" id="otherNumber" pattern="[0-9]{10}" required><br>
+                <button type="submit">Додати запис</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
